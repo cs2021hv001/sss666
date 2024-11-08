@@ -1,0 +1,38 @@
+server_name: "r.newcation.us.kg"
+pid_file: /data/homeserver.pid
+
+# Synapse 启动监听配置
+listeners:
+  - port: 8008
+    tls: false
+    type: http
+    x_forwarded: true
+    resources:
+      - names: [client, federation]
+        compress: false
+
+# 数据库配置 (这里使用 SQLite)
+database:
+  name: sqlite3
+  args:
+    database: /data/homeserver.db
+
+# 日志配置
+log_config: "/data/r.newcation.us.kg.log.config"
+
+# 媒体存储路径
+media_store_path: /data/media_store
+
+# 注册相关配置
+registration_shared_secret: "r:,RQYN216Qo8zAte&X0k&Afgc-MWfp&Xzp#hXZHWfAkW*vJvc"
+report_stats: true
+
+# 管理员权限设置
+admins:
+  - "@admin:r.newcation.us.kg"  # Replace with your admin user
+
+# 启用注册（审核注册）
+enable_registration: true
+enable_registration_without_verification: false
+registration:
+  enable_approval: true
