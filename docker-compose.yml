@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+  synapse:
+    image: "matrixdotorg/synapse:latest"
+    container_name: "matrix_synapse"
+    restart: always
+    ports:
+      - 8008:8008
+    volumes:
+      - "./data:/data"  # 将数据目录挂载到容器中
+      - "./homeserver.yaml:/data/homeserver.yaml"  # 挂载配置文件
+    environment:
+      SYNAPSE_SERVER_NAME: "r.newcation.us.kg"
+      SYNAPSE_REPORT_STATS: "yes"
+      REGISTRATION_SHARED_SECRET: "r:,RQYN216Qo8zAte&X0k&Afgc-MWfp&Xzp#hXZHWfAkW*vJvc"
+      MACAROON_SECRET_KEY: "OgbezTaz&19.^NYPx.w2Y#cJ:5G.vYb~zngQ#uWC_U,jfYE@NY"
+      FORM_SECRET: ".szrYL^y@9F36w4g5dyfrS.dTqi9eo6ly78BGfZ4Nh,w-wD#br"
+      SIGNING_KEY_PATH: "/data/r.newcation.us.kg.signing.key"
+    networks:
+      - synapse_network
+
+networks:
+  synapse_network:
+    driver: bridge
